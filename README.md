@@ -88,3 +88,7 @@ Note: [click here to view the explanation as to why no docker compose module is 
 ## Discussions
 ### No docker compose module usage
 
+
+## License
+Ansible is licensed under GNU GPLv3. You can view the [full license on the Ansible GitHub repository](https://github.com/ansible/ansible/blob/devel/COPYING).
+These templates are released into the public domain through the Unlicense. You can [view the LICENSE file in this repository here](LICENSE).
