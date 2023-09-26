@@ -87,8 +87,9 @@ Note: [click here to view the explanation as to why no docker compose module is 
 
 ## Discussions
 ### No docker compose module usage
-
+The docker Ansible-maintained Docker Compose modules as of writing have no support for Docker Compose v2 or above. Hence currently a manual solution is used. If I find a good external module/solution, I'll hopefully implement that down the line. (In case you know of one, please feel free to open an Issue and let me know!) 
 
 ## License
 Ansible is licensed under GNU GPLv3. You can view the [full license on the Ansible GitHub repository](https://github.com/ansible/ansible/blob/devel/COPYING).
+
 These templates are released into the public domain through the Unlicense. You can [view the LICENSE file in this repository here](LICENSE).
