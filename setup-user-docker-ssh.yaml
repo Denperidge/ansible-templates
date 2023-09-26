@@ -1,0 +1,19 @@
+# Expects loop: 
+# - [ username, [ [comment, file.pub], [..., ...] ]
+# - ...
+
+- name: Create {{item.username}} user
+  ansible.builtin.user:
+    name: "{{item.username}}"
+    groups: "{{item.username}}, docker"
+  
+- name: "{{ ansible_facts['nodename'] }} - {{item.username}}"
+  ansible.posix.authorized_key:
+    user: "{{item.username}}"
+    state: present
+    comment: "{{key.comment}}"
+    key: "{{ lookup('file', key.file) }}"
+  loop_control:
+    loop_var: key
+  loop: "{{item.sshkeys}}"  # Don't use keys; this is a method
+  

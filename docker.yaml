@@ -1,0 +1,16 @@
+- name: Copy {{name}} files
+  ansible.builtin.copy:
+    src: "{{src}}"
+    dest: "{{dest}}"
+
+- name: Stop {{name}}
+  ansible.builtin.shell:
+    chdir: "{{dest}}"
+    cmd: "docker compose down"
+  
+- name: Start {{name}}
+  async: 180
+  poll: 5
+  ansible.builtin.shell:
+    chdir: "{{dest}}"
+    cmd: "docker compose up -d"
