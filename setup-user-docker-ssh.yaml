@@ -5,7 +5,7 @@
 - name: Create {{item.username}} user
   ansible.builtin.user:
     name: "{{item.username}}"
-    groups: "{{item.username}}, docker"
+    groups: "docker"  # The group of item.username gets added automatically
   
 - name: "{{ ansible_facts['nodename'] }} - {{item.username}}"
   ansible.posix.authorized_key:
