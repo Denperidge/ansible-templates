@@ -5,6 +5,7 @@
     dest: "{{dest}}"
 
 - name: Link {{name}} service
+  when: ansible_facts['env']['USER'] == "root"
   ansible.builtin.command: sudo /usr/bin/systemctl enable {{servicefile}}
 
 - name: Stop {{name}} service
