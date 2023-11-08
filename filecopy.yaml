@@ -1,0 +1,10 @@
+- include_tasks: user-and-directory.yaml
+  vars:
+    name: "{{name}}"
+    src: "{{src}}"
+    dest: "{{dest}}"
+
+- name: Copy files
+  ansible.builtin.copy:
+    src: "{{src}}"
+    dest: "{{dest}}"

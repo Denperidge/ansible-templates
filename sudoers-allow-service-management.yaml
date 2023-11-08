@@ -1,5 +1,5 @@
 - name: Allow {{user}} to manage {{servicename}}
-  when: ansible_facts['env']['USER'] == "root"
+  become: true
   community.general.sudoers:
     name: allow-{{user}}-{{servicename}}-service
     state: present
@@ -10,4 +10,5 @@
       - /usr/bin/systemctl stop {{servicename}}
       - /usr/bin/systemctl stop {{servicename}}.service
       - /usr/bin/systemctl enable {{servicefile}}
+      - /usr/bin/systemctl link {{servicefile}}
       - /usr/bin/systemctl daemon-reload

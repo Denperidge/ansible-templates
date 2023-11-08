@@ -1,0 +1,13 @@
+- name: Create {{name}} user
+  become: true
+  ansible.builtin.user:
+    name: "{{name}}"
+    groups: "docker"  # The name group gets added automatically
+      
+- name: Create directory {{dest}}
+  become: true
+  ansible.builtin.file:
+    path: "{{dest}}"
+    state: directory
+    owner: "{{name}}"
+    group: "{{name}}"

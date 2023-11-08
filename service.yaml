@@ -1,25 +1,24 @@
-
-- name: Copy {{src}} to {{dest}}
-  ansible.builtin.copy:
-    src: "{{src}}"
-    dest: "{{dest}}"
-
-- name: Link {{name}} service
-  when: ansible_facts['env']['USER'] == "root"  # Not sure if this when is the best way to do things
-  ansible.builtin.command: sudo /usr/bin/systemctl enable {{servicefile}}
-
-- name: Stop {{name}} service
-  async: 180
-  poll: 5
+- name: Setup service {{name}}
   become: true
-  become_user: "{{ ansible_facts['env']['USER'] }}"
-  ansible.builtin.systemd:
-    name: "{{name}}"
-    state: stopped
+  block:
+    - name: Copy {{src}} to {{dest}}
+      ansible.builtin.copy:
+        src: "{{src}}"
+        dest: "{{dest}}"
 
-- name: Reload daemon
-  ansible.builtin.command: sudo /usr/bin/systemctl daemon-reload
+    - name: Link {{name}} service
+      ansible.builtin.command: sudo /usr/bin/systemctl enable {{servicefile}}
 
-- name: Start {{name}} service
-  ansible.builtin.command: sudo /usr/bin/systemctl start {{name}}
+    - name: Stop {{name}} service
+      async: 180
+      poll: 5
+      ansible.builtin.systemd:
+        name: "{{name}}"
+        state: stopped
+
+    - name: Reload daemon
+      ansible.builtin.command: sudo /usr/bin/systemctl daemon-reload
+
+    - name: Start {{name}} service
+      ansible.builtin.command: sudo /usr/bin/systemctl start {{name}}
 
