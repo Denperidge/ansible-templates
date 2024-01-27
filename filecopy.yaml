@@ -1,8 +1,7 @@
 - include_tasks: user-and-directory.yaml
   vars:
-    name: "{{name}}"
-    src: "{{src}}"
-    dest: "{{dest}}"
+    username: "{{name}}"
+    dest_path: "{{dest}}"
 
 - name: Copy files
   ansible.builtin.copy:
